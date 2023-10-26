@@ -33,10 +33,11 @@ class MatrixOperations:
         """
         Private function to print a matrix
         """
-        if isinstance(self.matrix, list):
+        if isinstance(self.matrix, list) and self.matrix:
             print(np.array_str(self.matrix))
         else:
-            print("Invalid matrix format.")
+            print("Invalid or empty matrix format.")
+
 
     def addition(self,other):
         """Function that adds two matrices together"""
