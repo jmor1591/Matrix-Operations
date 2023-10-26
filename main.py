@@ -33,3 +33,5 @@ def main():
     print("\nTransposed Matrix:")
     if transposed_matrix is not None:
         print(np.array_str(transposed_matrix))
+    
+    print("Program finished")
