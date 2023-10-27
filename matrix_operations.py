@@ -2,7 +2,10 @@ import numpy as np
 
 class MatrixOperations:
     def __init__(self, matrix):
+        if not isinstance(matrix, list) or not matrix or not all(isinstance(row, list) for row in matrix):
+            raise ValueError("Invalid matrix format.")
         self.matrix = matrix
+
 
     def _get_num_rows(self):
         """
@@ -28,16 +31,22 @@ class MatrixOperations:
         if self._get_num_rows() == other_matrix._get_num_rows() and self._get_num_columns() == other_matrix._get_num_columns():
             return True
         return False
+    
+    def _proper(self):
+        if not isinstance(self.matrix, list) or not all(isinstance(row, list) for row in self.matrix):
+            print("Invalid matrix format.")
+            return False
+        return True
 
+    """
+    Unneeded function, print(matrix) works fine
     def _printMatrix(self):
-        """
-        Private function to print a matrix
-        """
-        if isinstance(self.matrix, list):
+        # Private function to print a matrix
+        if isinstance(self.matrix, list) and self.matrix:
             print(np.array_str(self.matrix))
         else:
             print("Invalid or empty matrix format.")
-
+    """
 
     def addition(self,other):
         """Function that adds two matrices together"""
@@ -72,3 +81,33 @@ class MatrixOperations:
             # If the matrix is not in the correct format, print an error message
             print("Invalid matrix format. Transpose operation cannot be performed.")
             return None
+    
+    def determinant(self):
+        """
+        Function to calculate the determinant of a matrix
+        """
+        if not isinstance(self.matrix, list) or not all(isinstance(row,list) for row in self.matrix):
+            print("Invalid matrix format.")
+            return None
+        
+        try:
+            det = np.linalg.det(self.matrix)
+            return det
+        except np.linalg.LinAlgError:
+            print("Matrix is not singular, determinant cannot be found")
+            return None
+    
+    def inverse(self):
+        """
+        Function to compute the inverse of a matrix
+        """
+        determinant = self.determinant()
+        if determinant == 0:
+            print("Matrix is singular and cannot be inverted")
+            return None
+        
+        try:
+            inverse_matrix = np.linalg.inv(self.matrix)
+            return inverse_matrix
+        except np.linalg.LinAlgError:
+            print("Error occurred while computing the inverse")
