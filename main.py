@@ -32,5 +32,39 @@ transposed_matrix = matrix_operations1.transpose()
 print("\nTransposed Matrix:")
 if transposed_matrix is not None:
     print(np.array_str(transposed_matrix))
+
+# Test determinant function
+    print("Determinant of Matrix 1:")
+    determinant_result1 = matrix_operations1.determinant()
+    print(determinant_result1)
+
+    print("\nDeterminant of Matrix 2:")
+    determinant_result2 = matrix_operations2.determinant()
+    print(determinant_result2)
+
+    # Test inverse function
+    print("\nInverse of Matrix 1:")
+    inverse_result1 = matrix_operations1.inverse()
+    if inverse_result1 is not None:
+        print(inverse_result1)
+
+    print("\nInverse of Matrix 2:")
+    inverse_result2 = matrix_operations2.inverse()
+    if inverse_result2 is not None:
+        print(inverse_result2)
+    
+    eigenvalues_result = matrix_operations1.eigenvalues()
+
+    # Print the result
+    if eigenvalues_result is not None:
+        print("Eigenvalues of the Matrix:", eigenvalues_result)
+    
+    # Compute eigenvalues and eigenvectors
+    eigenvalues, eigenvectors = np.linalg.eig(matrix)
+
+    print("Eigenvalues:")
+    print(eigenvalues)
+    print("Eigenvectors:")
+    print(eigenvectors)
     
 print("Program finished")

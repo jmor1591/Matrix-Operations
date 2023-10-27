@@ -111,3 +111,46 @@ class MatrixOperations:
             return inverse_matrix
         except np.linalg.LinAlgError:
             print("Error occurred while computing the inverse")
+    
+    def eigenvalues(self):
+        """
+        Function to compute the eigenvalues of the matrix.
+        """
+        if not isinstance(self.matrix, list) or not all(isinstance(row, list) for row in self.matrix):
+            print("Invalid matrix format.")
+            return None
+        
+        try:
+            eigenvalues = np.linalg.eigvals(self.matrix)
+            return eigenvalues
+        except np.linalg.LinAlgError:
+            print("Error occurred while computing the eigenvalues.")
+            return None
+    
+    def eigenvectors(self, eigenvalues):
+        """
+        Compute the eigenvectors corresponding to given eigenvalues.
+
+        Args:
+            eigenvalues (list): List of eigenvalues for which eigenvectors are computed.
+
+        Returns:
+            list: A list of numpy arrays representing the eigenvectors corresponding to the given eigenvalues.
+                  Each array represents an eigenvector.
+                  Returns None if there's an error during computation.
+        """
+        if not isinstance(self.matrix, list) or not all(isinstance(row, list) for row in self.matrix):
+            print("Invalid matrix format.")
+            return None
+        
+        try:
+            eigenvalues, eigenvectors = np.linalg.eig(self.matrix)
+            selected_eigenvectors = []
+            for eigenvalue in eigenvalues:
+                if eigenvalue in eigenvalues:
+                    index = np.where(eigenvalues == eigenvalue)[0][0]
+                    selected_eigenvectors.append(eigenvectors[:, index])
+            return selected_eigenvectors
+        except np.linalg.LinAlgError:
+            print("Error occurred while computing the eigenvectors.")
+            return None
